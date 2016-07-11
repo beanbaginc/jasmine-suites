@@ -1,5 +1,5 @@
 /*
- * Namespaced test suites for Jasmine.
+ * Namespaced test suites for Jasmine 1.3.x.
  *
  * Copyright (C) 2014 Beanbag, Inc.
  *
