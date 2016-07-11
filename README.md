@@ -4,8 +4,8 @@ Namespaced Jasmine Suites
 Overview
 --------
 
-This extends [Jasmine](http://pivotal.github.io/jasmine/) by making it easy to
-create nested, reusable namespaces for test suites.
+This extends [Jasmine](http://pivotal.github.io/jasmine/) 1.4.x by making it
+easy to create nested, reusable namespaces for test suites.
 
 Typically, a large codebase using Jasmine will split tests into multiple files,
 each with a `describe()` call wrapping the file's tests. This works fine for
