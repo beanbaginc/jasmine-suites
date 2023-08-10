@@ -4,7 +4,7 @@ Namespaced Jasmine Suites
 Overview
 --------
 
-This extends [Jasmine](http://pivotal.github.io/jasmine/) 1.4.x by making it
+This extends [Jasmine](http://pivotal.github.io/jasmine/) 4.6+ by making it
 easy to create nested, reusable namespaces for test suites.
 
 Typically, a large codebase using Jasmine will split tests into multiple files,
@@ -15,8 +15,10 @@ limit the test run to those tests.
 
 Namespaced suites solve this by taking a namespaced path (something like
 `projectname/mysuite/component`) and automatically generating test suites for
-each component of the namespace. It will also merge any tests in that
-refer to the same parts of the namespace from other files.
+each component of the namespace.
+
+It will also merge any tests in that refer to the same parts of the namespace
+from other files.
 
 
 Usage
@@ -88,8 +90,8 @@ Jasmine will end up laying out the tests like:
 Where is this used?
 -------------------
 
-We use jasmine-suites at [Beanbag](http://www.beanbaginc.com/) for our
-[Review Board](http://www.reviewboard.org/) and
+We use jasmine-suites at [Beanbag](https://www.beanbaginc.com/) for our
+[Review Board](https://www.reviewboard.org/) and
 [RBCommons](https://rbcommons.com/) products.
 
 If you use jasmine-suites, let us know and we'll add you to a shiny new list on

@@ -1,15 +1,23 @@
 /*
- * Namespaced test suites for Jasmine 2.4+.
+ * Jasmine Suites 2.0.
  *
- * Copyright (C) 2016 Beanbag, Inc.
+ * This offers namespaced test suites for Jasmine 4.6+.
+ *
+ * Copyright (C) 2014-2023 Beanbag, Inc.
  *
  * Licensed under the MIT license.
  */
-(function() {
+import 'jasmine';
 
 
-var SuiteInfo,
-    _rootSuite;
+console.assert(
+    jasmine && jasmine.SuiteBuilder &&
+    jasmine.SuiteBuilder.prototype.addSpecsToSuite_,
+    'jasmine-suites is not compatible with this version of Jasmine');
+
+
+let _curSuiteObj = null;
+let _rootSuite = null;
 
 
 /*
@@ -22,7 +30,7 @@ var SuiteInfo,
  * to the suite. This makes it very easy to organize tests, making it much
  * easier to run subsets of tests across many files.
  */
-SuiteInfo = function(description) {
+const SuiteInfo = function(description) {
     this.description = description;
     this.specs = null;
     this.children = {};
@@ -90,7 +98,8 @@ SuiteInfo.prototype.describe = function(parentSuiteInfo) {
                 oldParentSuiteObj,
                 i;
 
-            self._suiteObj = this;
+            self._suiteObj = _curSuiteObj;
+            console.assert(self._suiteObj);
 
             if (parentSuiteInfo) {
                 parentSuiteObj = parentSuiteInfo._suiteObj;
@@ -131,6 +140,20 @@ _rootSuite = new SuiteInfo();
 
 
 /*
+ * We need access to the suite objects, which we can no longer get with 'this'
+ * above. So we need to monkey-patch the SuiteBuilder to capture this.
+ */
+const suiteBuilderProto = jasmine.SuiteBuilder.prototype;
+const _addSpecsToSuite = suiteBuilderProto.addSpecsToSuite_;
+
+suiteBuilderProto.addSpecsToSuite_ = function(suite, definitionFn) {
+    _curSuiteObj = suite;
+
+    return _addSpecsToSuite.call(this, suite, definitionFn);
+};
+
+
+/*
  * Defines a test suite with a nested, reusable namespace.
  *
  * The namespace consists of a '/'-separated list of names that the provided
@@ -143,7 +166,7 @@ _rootSuite = new SuiteInfo();
  * tests under file paths, project names, or anything else, allowing those
  * related tests to be run together.
  */
-window.suite = function(namespace, specs) {
+export function suite(namespace, specs) {
     var parts = namespace.split('/'),
         parentSuite = _rootSuite,
         key = '',
@@ -171,4 +194,4 @@ window.suite = function(namespace, specs) {
 };
 
 
-})();
+jasmine.getGlobal().suite = suite;
