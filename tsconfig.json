@@ -1,0 +1,10 @@
+{
+    "extends": "@beanbag/js-buildkit/tsconfig.json",
+    "compilerOptions": {
+        "emitDeclarationOnly": true,
+        "strict": false
+    },
+    "include": [
+        "src/*"
+    ]
+}

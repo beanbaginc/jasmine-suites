@@ -1,40 +1,49 @@
 {
-	"name": "@beanbag/jasmine-suites",
-	"version": "2.0.0",
-	"description": "Namespaced, merged suite names for Jasmine.",
-	"homepage": "https://github.com/beanbaginc/jasmine-suites",
-	"github": "https://github.com/beanbaginc/jasmine-suites",
-	"keywords": [
-		"jasmine",
-		"tests",
-		"unit tests"
-	],
-	"author": {
-		"name": "Beanbag, Inc.",
-		"email": "questions@beanbaginc.com",
-		"url": "https://www.beanbaginc.com"
-	},
-	"license": "MIT",
-	"main": "lib/index.js",
-	"files": [
-		"LICENSE",
-		"NEWS.md",
-		"README.md",
-		"lib"
-	],
-	"scripts": {
-		"build": "rm -rf lib && rollup -c --bundleConfigAsCjs"
-	},
-	"devDependencies": {
-		"@babel/cli": "^7.21.0",
-		"@babel/core": "^7.21.3",
-		"@babel/preset-env": "^7.20.2",
-		"@beanbag/eslint-plugin": "^1.0.0",
-		"@rollup/plugin-babel": "^6.0.3",
-		"@rollup/plugin-node-resolve": "^15.0.1",
-		"rollup": "^3.20.2"
-	},
-	"dependencies": {
-		"jasmine": "^4.6.0"
-	}
+    "name": "@beanbag/jasmine-suites",
+    "version": "3.0.0",
+    "description": "Namespaced, merged suite names for Jasmine.",
+    "homepage": "https://github.com/beanbaginc/jasmine-suites",
+    "github": "https://github.com/beanbaginc/jasmine-suites",
+    "keywords": [
+        "jasmine",
+        "tests",
+        "unit tests"
+    ],
+    "author": {
+        "name": "Beanbag, Inc.",
+        "email": "questions@beanbaginc.com",
+        "url": "https://www.beanbaginc.com"
+    },
+    "license": "MIT",
+    "main": "lib/index.js",
+    "exports": {
+        "import": {
+            "types": "./lib/index.d.mts",
+            "default": "./lib/esm/index.js"
+        },
+        "require": {
+            "types": "./lib/index.d.ts",
+            "default": "./lib/cjs/index.js"
+        }
+    },
+    "types": "lib/index.d.ts",
+    "files": [
+        "LICENSE",
+        "NEWS.md",
+        "README.md",
+        "lib"
+    ],
+    "scripts": {
+        "clean": "rm -rf lib",
+        "build": "tsc && rollup -c --bundleConfigAsCjs",
+        "full-build": "npm run clean && npm run build",
+        "lint": "eslint src"
+    },
+    "devDependencies": {
+        "@beanbag/frontend-buildkit": "^2.0.0",
+        "@beanbag/js-buildkit": "^1.0.3"
+    },
+    "peerDependencies": {
+        "jasmine-core": "^5"
+    }
 }

@@ -1,5 +1,6 @@
 *.tgz
 .*.swp
 
+_build
 lib
 node_modules
